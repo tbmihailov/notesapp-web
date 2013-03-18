@@ -1,0 +1,1 @@
+- Nuget.exe - used for updating packages.config when solution is fresh copy from the repository
