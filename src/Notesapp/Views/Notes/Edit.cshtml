@@ -1,0 +1,186 @@
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model Notesapp.Models.Note
+
+
+@{
+    ViewBag.Title = "Edit";
+
+}
+
+<h2>Edit</h2>
+
+
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Note</legend>
+
+
+        @Html.HiddenFor(model => model.Id)
+
+
+		
+        <div class="control-group">
+
+            @Html.LabelFor(model => model.Name)
+
+        
+			<div class="controls">
+
+				@Html.EditorFor(model => model.Name)
+
+				@Html.ValidationMessageFor(model => model.Name, string.Empty, new { @class="help-inline" })
+			</div> 
+		</div>	
+
+
+		
+        <div class="control-group">
+
+            @Html.LabelFor(model => model.Content)
+
+        
+			<div class="controls">
+
+				@Html.EditorFor(model => model.Content)
+
+				@Html.ValidationMessageFor(model => model.Content, string.Empty, new { @class="help-inline" })
+			</div> 
+		</div>	
+
+
+		
+        <div class="control-group">
+
+            @Html.LabelFor(model => model.Created)
+
+        
+			<div class="controls">
+
+				@Html.EditorFor(model => model.Created)
+
+				@Html.ValidationMessageFor(model => model.Created, string.Empty, new { @class="help-inline" })
+			</div> 
+		</div>	
+
+
+		
+        <div class="control-group">
+
+            @Html.LabelFor(model => model.Lat)
+
+        
+			<div class="controls">
+
+				@Html.EditorFor(model => model.Lat)
+
+				@Html.ValidationMessageFor(model => model.Lat, string.Empty, new { @class="help-inline" })
+			</div> 
+		</div>	
+
+
+		
+        <div class="control-group">
+
+            @Html.LabelFor(model => model.Lon)
+
+        
+			<div class="controls">
+
+				@Html.EditorFor(model => model.Lon)
+
+				@Html.ValidationMessageFor(model => model.Lon, string.Empty, new { @class="help-inline" })
+			</div> 
+		</div>	
+
+
+		
+        <div class="control-group">
+
+            @Html.LabelFor(model => model.Image)
+
+        
+			<div class="controls">
+
+				@Html.EditorFor(model => model.Image)
+
+				@Html.ValidationMessageFor(model => model.Image, string.Empty, new { @class="help-inline" })
+			</div> 
+		</div>	
+
+
+		
+        <div class="control-group">
+
+            @Html.LabelFor(model => model.Owner)
+
+        
+			<div class="controls">
+
+				@Html.EditorFor(model => model.Owner)
+
+				@Html.ValidationMessageFor(model => model.Owner, string.Empty, new { @class="help-inline" })
+			</div> 
+		</div>	
+
+
+		
+        <div class="control-group">
+
+            @Html.LabelFor(model => model.GroupId, "Group")
+
+        
+			<div class="controls">
+
+				@Html.DropDownList("GroupId", String.Empty)
+
+				@Html.ValidationMessageFor(model => model.GroupId, string.Empty, new { @class="help-inline" })
+			</div> 
+		</div>	
+
+
+        <div class="control-group">
+			<div class="controls">
+				<input type="submit" value="Save" class="btn" /> &nbsp; @Html.ActionLink("Cancel", "Index")
+			</div>
+        </div>
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+	<script>
+
+	$.validator.setDefaults({
+            highlight: function (element) {
+                $(element).closest(".control-group").addClass("error");
+            },
+            unhighlight: function (element) {
+                $(element).closest(".control-group").removeClass("error");
+            }
+        });
+	</script>
+}
+
+
+
