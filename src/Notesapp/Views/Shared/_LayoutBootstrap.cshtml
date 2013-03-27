@@ -40,19 +40,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                @Html.ActionLink(
-                        "Notesapp",
-                        "Index",
-                        "Home",
-                        null,
-                        new { @class = "brand" }
-                         )
+                @Html.ActionLink("Notesapp", "Index", "Home", null, new { @class = "brand" })
                 <div class="nav-collapse">
                     @Html.Partial("_LoginPartial")
                     <ul class="nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li >
+                            @Html.ActionLink("Home", "Index", "Home")
+                        </li>
+                        <li >
+                            @Html.ActionLink("Groups", "Index", "Groups")
+                        </li>
+                        <li >
+                            @Html.ActionLink("Notes", "Index", "Notes")
+                        </li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
