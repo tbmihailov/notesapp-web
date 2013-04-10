@@ -131,7 +131,7 @@ namespace Notesapp.Controllers
 
             //user ownership validation
             Group group = db.Groups
-                        .Where(g => g.Owner == CurrentUser && g.Id == group.Id)
+                        .Where(g => g.Owner == CurrentUser && g.Id == id)
                         .FirstOrDefault();
             if (group == null)
             {
