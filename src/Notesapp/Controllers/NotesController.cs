@@ -90,6 +90,7 @@ namespace Notesapp.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Entry(note).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -102,6 +103,20 @@ namespace Notesapp.Controllers
         // GET: /Notes/Delete/5
 
         public ActionResult Delete(int id)
+        {
+            Note note = db.Notes.ForUser(CurrentUserName).Single(n => n.Id == id);
+            if (note == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(note);
+        }
+
+        //
+        // Post: /Notes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
         {
             Note note = db.Notes.ForUser(CurrentUserName).Single(n => n.Id == id);
             db.Notes.Remove(note);

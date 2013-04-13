@@ -105,7 +105,8 @@ namespace <#= Model.Namespace #>
 <# if(primaryKey.Type == typeof(Guid)) { #>
                 <#= modelVariable #>.<#= primaryKey.Name #> = Guid.NewGuid();
 <# } #>
-			//<#= modelVariable #>.Owner = CurrentUserName;//TODO: Add owner property with current user name/id
+				//<#= modelVariable #>.Created = DateTime.Now;//TODO: Created property with Create date
+				//<#= modelVariable #>.Owner = CurrentUserName;//TODO: Add owner property with current user name/id
 <# if(isObjectContext) { #>
                 db.<#= entitySetName #>.AddObject(<#= modelVariable #>);
 <# } else { #>
@@ -149,6 +150,16 @@ namespace <#= Model.Namespace #>
         {
             if (ModelState.IsValid)
             {
+				//user ownership validation
+                bool doesExistForCurrentUser = db.<#= entitySetName #>
+                            .Where(g => g.Id == <#= modelVariable #>.Id)
+                            .ForUser(CurrentUserName)
+                            .Count() > 0;
+
+                if (!doesExistForCurrentUser)
+                {
+                    return HttpNotFound();
+                }				
 <# if(isObjectContext) { #>
                 db.<#= entitySetName #>.Attach(<#= modelVariable #>);
                 db.ObjectStateManager.ChangeObjectState(<#= modelVariable #>, EntityState.Modified);
@@ -169,16 +180,36 @@ namespace <#= Model.Namespace #>
 
         public ActionResult Delete(<#= primaryKey.ShortTypeName #> id)
         {
-<# if(isObjectContext) { #>
             <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.ForUser(CurrentUserName).Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
+			if (<#= modelVariable #> == null)
+            {
+                return HttpNotFound();
+            }
+			
+			return View(<#= modelVariable #>);
+        }
+
+		//
+        // POST: <#= routePrefix #>Delete/5
+		[HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(<#= primaryKey.ShortTypeName #> id)
+        {
+			<#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.ForUser(CurrentUserName).Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
+			if (<#= modelVariable #> == null)
+            {
+                return HttpNotFound();
+            }
+
+<# if(isObjectContext) { #>
             db.<#= entitySetName #>.DeleteObject(<#= modelVariable #>);
 <# } else { #>
-            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.ForUser(CurrentUserName).Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
             db.<#= entitySetName #>.Remove(<#= modelVariable #>);
 <# } #>
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

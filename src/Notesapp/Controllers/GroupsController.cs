@@ -5,14 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 using Notesapp.Models;
-
-
 
 namespace Notesapp.Controllers
 {
-    [Authorize]
+	[Authorize]
     public class GroupsController : ControllerBase
     {
         private NotesappContext db = new NotesappContext();
@@ -22,7 +19,9 @@ namespace Notesapp.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Groups.ForUser(CurrentUserName).ToList());
+            return View(db.Groups
+						.ForUser(CurrentUserName)
+						.ToList());
         }
 
         //
@@ -30,11 +29,7 @@ namespace Notesapp.Controllers
 
         public ActionResult Details(int id)
         {
-            Group group = db.Groups
-                            .Where(g => g.Id == id)
-                            .ForUser(CurrentUserName)
-                            .FirstOrDefault();
-
+            Group group = db.Groups.ForUser(CurrentUserName).Single(g => g.Id == id);
             if (group == null)
             {
                 return HttpNotFound();
@@ -44,6 +39,7 @@ namespace Notesapp.Controllers
 
         //
         // GET: /Groups/Create
+
         public ActionResult Create()
         {
             return View(new Group());
@@ -51,18 +47,18 @@ namespace Notesapp.Controllers
 
         //
         // POST: /Groups/Create
+
         [HttpPost]
         public ActionResult Create(Group group)
         {
             if (ModelState.IsValid)
             {
-                group.Owner = CurrentUserName;
+                //group.Created = DateTime.Now;//TODO: Created property with Create date
+			    group.Owner = CurrentUserName;//TODO: Add owner property with current user name/id
                 db.Groups.Add(group);
                 db.SaveChanges();
-
                 return RedirectToAction("Index");
             }
-
 
             return View(group);
         }
@@ -72,17 +68,12 @@ namespace Notesapp.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Group group = db.Groups
-                            .Where(g => g.Id == id)
-                            .ForUser(CurrentUserName)
-                            .FirstOrDefault();
-
+            Group group = db.Groups.ForUser(CurrentUserName).Single(g => g.Id == id);
             if (group == null)
             {
                 return HttpNotFound();
             }
-
-            return View("Edit", group);
+            return View("Create", group);
         }
 
         //
@@ -93,7 +84,7 @@ namespace Notesapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                //user ownership validation
+				//user ownership validation
                 bool doesExistForCurrentUser = db.Groups
                             .Where(g => g.Id == group.Id)
                             .ForUser(CurrentUserName)
@@ -102,14 +93,11 @@ namespace Notesapp.Controllers
                 if (!doesExistForCurrentUser)
                 {
                     return HttpNotFound();
-                }
-
+                }				
                 db.Entry(group).State = EntityState.Modified;
-
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View("Create", group);
         }
 
@@ -118,22 +106,32 @@ namespace Notesapp.Controllers
 
         public ActionResult Delete(int id)
         {
-            //user ownership validation
-            Group group = db.Groups
-                            .Where(g => g.Id == id)
-                            .ForUser(CurrentUserName)
-                            .FirstOrDefault();
+            Group group = db.Groups.ForUser(CurrentUserName).Single(g => g.Id == id);
+			if (group == null)
+            {
+                return HttpNotFound();
+            }
+			
+			return View(group);
+        }
 
-            if (group == null)
+		//
+        // POST: /Groups/Delete/5
+		[HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+			Group group = db.Groups.ForUser(CurrentUserName).Single(g => g.Id == id);
+			if (group == null)
             {
                 return HttpNotFound();
             }
 
             db.Groups.Remove(group);
-
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

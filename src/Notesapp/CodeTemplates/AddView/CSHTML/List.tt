@@ -26,7 +26,7 @@ if(mvcHost.IsPartialView) {
 #>
 
 @{
-    ViewBag.Title = "<#= mvcHost.ViewName #>";
+    ViewBag.Title = "<#= entitySetName #>";
 <#
 if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) {
 #>
