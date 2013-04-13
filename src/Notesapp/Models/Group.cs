@@ -13,4 +13,13 @@ namespace Notesapp.Models
         public virtual ICollection<Note> Notes { get; set; }
         public string Owner { get; set; }
     }
+
+    public static class GroupExtensions
+    {
+        public static IQueryable<Group> ForUser(this IQueryable<Group> groups, string userName)
+        {
+            return groups.Where(g => g.Owner == userName);
+        }
+    }
+
 }

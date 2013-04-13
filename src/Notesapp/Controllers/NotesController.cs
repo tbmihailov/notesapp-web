@@ -1,25 +1,16 @@
-﻿
-
-
-
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 using Notesapp.Models;
-
-
 
 namespace Notesapp.Controllers
 {
-
-    public class NotesController : Controller
+    [Authorize]
+    public class NotesController : ControllerBase
     {
         private NotesappContext db = new NotesappContext();
 
@@ -28,11 +19,8 @@ namespace Notesapp.Controllers
 
         public ActionResult Index()
         {
-
-
             var notes = db.Notes.Include(n => n.Group);
             return View(notes.ToList());
-
         }
 
         //

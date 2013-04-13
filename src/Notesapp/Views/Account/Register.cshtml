@@ -13,22 +13,25 @@
     @Html.ValidationSummary()
 
     <fieldset>
-        <legend>Registration Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
+        <div class="control-group">
+            @Html.LabelFor(m => m.UserName)
+            <div class="controls">
                 @Html.TextBoxFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Password)
+            <div class="controls">
                 @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.ConfirmPassword)
+            <div class="controls">
                 @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-        </ol>
-        <input type="submit" value="Register" />
+            </div>
+        </div>
+        <input type="submit" value="Register" class="btn btn-primary" />
     </fieldset>
 }
 

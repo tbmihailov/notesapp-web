@@ -1,10 +1,4 @@
-﻿
-
-
-
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -19,23 +13,16 @@ using Notesapp.Models;
 namespace Notesapp.Controllers
 {
     [Authorize]
-    public class GroupsController : Controller
+    public class GroupsController : ControllerBase
     {
         private NotesappContext db = new NotesappContext();
 
-        public string CurrentUser
-        {
-            get
-            {
-                return this.User.Identity.IsAuthenticated ? this.User.Identity.Name : string.Empty;
-            }
-        }
         //
         // GET: /Groups/
 
         public ActionResult Index()
         {
-            return View(db.Groups.Where(g=>g.Owner == CurrentUser).ToList());
+            return View(db.Groups.ForUser(CurrentUserName).ToList());
         }
 
         //
@@ -44,7 +31,8 @@ namespace Notesapp.Controllers
         public ActionResult Details(int id)
         {
             Group group = db.Groups
-                            .Where(g => g.Owner == CurrentUser && g.Id == id)
+                            .Where(g => g.Id == id)
+                            .ForUser(CurrentUserName)
                             .FirstOrDefault();
 
             if (group == null)
@@ -68,7 +56,7 @@ namespace Notesapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                group.Owner = CurrentUser;
+                group.Owner = CurrentUserName;
                 db.Groups.Add(group);
                 db.SaveChanges();
 
@@ -84,9 +72,9 @@ namespace Notesapp.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-
             Group group = db.Groups
-                            .Where(g => g.Owner == CurrentUser && g.Id == id)
+                            .Where(g => g.Id == id)
+                            .ForUser(CurrentUserName)
                             .FirstOrDefault();
 
             if (group == null)
@@ -94,7 +82,7 @@ namespace Notesapp.Controllers
                 return HttpNotFound();
             }
 
-            return View("Create", group);
+            return View("Edit", group);
         }
 
         //
@@ -106,10 +94,12 @@ namespace Notesapp.Controllers
             if (ModelState.IsValid)
             {
                 //user ownership validation
-                Group groupToEdit = db.Groups
-                            .Where(g => g.Owner == CurrentUser && g.Id == group.Id)
-                            .FirstOrDefault();
-                if (groupToEdit == null)
+                bool doesExistForCurrentUser = db.Groups
+                            .Where(g => g.Id == group.Id)
+                            .ForUser(CurrentUserName)
+                            .Count() > 0;
+
+                if (!doesExistForCurrentUser)
                 {
                     return HttpNotFound();
                 }
@@ -128,11 +118,12 @@ namespace Notesapp.Controllers
 
         public ActionResult Delete(int id)
         {
-
             //user ownership validation
             Group group = db.Groups
-                        .Where(g => g.Owner == CurrentUser && g.Id == id)
-                        .FirstOrDefault();
+                            .Where(g => g.Id == id)
+                            .ForUser(CurrentUserName)
+                            .FirstOrDefault();
+
             if (group == null)
             {
                 return HttpNotFound();

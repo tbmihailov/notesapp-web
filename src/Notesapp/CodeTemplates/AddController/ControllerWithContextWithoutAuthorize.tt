@@ -36,8 +36,7 @@ namespace <#= Model.Namespace #>
     var lambdaVar = modelVariable[0];
     var isObjectContext = typeof(ObjectContext).IsAssignableFrom(Model.ContextType);
 #>
-	[Authorize]
-    public class <#= Model.ControllerName #> : ControllerBase
+    public class <#= Model.ControllerName #> : Controller
     {
         private <#= Model.ContextType.Name #> db = new <#= Model.ContextType.Name #>();
 
@@ -56,13 +55,9 @@ namespace <#= Model.Namespace #>
 #>
 <# if(!String.IsNullOrEmpty(includeExpressions)) { #>
             var <#= entitySetVariable #> = db.<#= entitySetName #><#= includeExpressions #>;
-            return View(<#= entitySetVariable #>
-						.ForUser(CurrentUserName)//TO DO add ForUser extensions to IQueryable<<#= modelName #>>
-						.ToList());
+            return View(<#= entitySetVariable #>.ToList());
 <# } else { #>
-            return View(db.<#= entitySetName #>
-						.ForUser(CurrentUserName)
-						<#= includeExpressions #>.ToList());
+            return View(db.<#= entitySetName #><#= includeExpressions #>.ToList());
 <# } #>
         }
 
@@ -72,9 +67,9 @@ namespace <#= Model.Namespace #>
         public ActionResult Details(<#= primaryKey.ShortTypeName #> id)
         {
 <# if(isObjectContext) { #>
-            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.ForUser(CurrentUserName).Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
+            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
 <# } else { #>
-            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.ForUser(CurrentUserName).Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
+            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.Find(id);
 <# } #>
             if (<#= modelVariable #> == null)
             {
@@ -105,7 +100,6 @@ namespace <#= Model.Namespace #>
 <# if(primaryKey.Type == typeof(Guid)) { #>
                 <#= modelVariable #>.<#= primaryKey.Name #> = Guid.NewGuid();
 <# } #>
-			//<#= modelVariable #>.Owner = CurrentUserName;//TODO: Add owner property with current user name/id
 <# if(isObjectContext) { #>
                 db.<#= entitySetName #>.AddObject(<#= modelVariable #>);
 <# } else { #>
@@ -127,9 +121,9 @@ namespace <#= Model.Namespace #>
         public ActionResult Edit(<#= primaryKey.ShortTypeName #> id = <#= primaryKey.DefaultValue #>)
         {
 <# if(isObjectContext) { #>
-            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.ForUser(CurrentUserName).Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
+            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
 <# } else { #>
-            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.ForUser(CurrentUserName).Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
+            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.Find(id);
 <# } #>
             if (<#= modelVariable #> == null)
             {
@@ -170,10 +164,10 @@ namespace <#= Model.Namespace #>
         public ActionResult Delete(<#= primaryKey.ShortTypeName #> id)
         {
 <# if(isObjectContext) { #>
-            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.ForUser(CurrentUserName).Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
+            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
             db.<#= entitySetName #>.DeleteObject(<#= modelVariable #>);
 <# } else { #>
-            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.ForUser(CurrentUserName).Single(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKey.Name #> == id);
+            <#= modelName #> <#= modelVariable #> = db.<#= entitySetName #>.Find(id);
             db.<#= entitySetName #>.Remove(<#= modelVariable #>);
 <# } #>
             db.SaveChanges();

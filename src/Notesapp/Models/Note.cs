@@ -17,5 +17,14 @@ namespace Notesapp.Models
         public string Owner { get; set; }
         public int GroupId { get; set; }
         public Group Group { get; set; }
+        
+    }
+
+    public static class NoteExtensions
+    {
+        public static IQueryable<Note> ForUser(this IQueryable<Note> notes, string userName)
+        {
+            return notes.Where(n => n.Owner == userName);
+        }
     }
 }
