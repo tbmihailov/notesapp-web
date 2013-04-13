@@ -9,7 +9,7 @@ using Notesapp.Models;
 
 namespace Notesapp.Controllers
 {
-    [Authorize]
+	[Authorize]
     public class NotesController : ControllerBase
     {
         private NotesappContext db = new NotesappContext();
@@ -20,7 +20,9 @@ namespace Notesapp.Controllers
         public ActionResult Index()
         {
             var notes = db.Notes.Include(n => n.Group);
-            return View(notes.ToList());
+            return View(notes
+						.ForUser(CurrentUserName)//TO DO add ForUser extensions to IQueryable<Note>
+						.ToList());
         }
 
         //
@@ -28,9 +30,7 @@ namespace Notesapp.Controllers
 
         public ActionResult Details(int id)
         {
-
-            Note note = db.Notes.Find(id);
-
+            Note note = db.Notes.ForUser(CurrentUserName).Single(n => n.Id == id);
             if (note == null)
             {
                 return HttpNotFound();
@@ -43,9 +43,7 @@ namespace Notesapp.Controllers
 
         public ActionResult Create()
         {
-
             ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name");
-
             return View(new Note());
         }
 
@@ -57,17 +55,16 @@ namespace Notesapp.Controllers
         {
             if (ModelState.IsValid)
             {
-
+			//note.Owner = CurrentUserName;//TODO: Add owner property with current user name/id
+                note.Created = DateTime.Now;
+                note.Owner = CurrentUserName;
 
                 db.Notes.Add(note);
-
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-
             ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name", note.GroupId);
-
             return View(note);
         }
 
@@ -76,16 +73,12 @@ namespace Notesapp.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-
-            Note note = db.Notes.Find(id);
-
+            Note note = db.Notes.ForUser(CurrentUserName).Single(n => n.Id == id);
             if (note == null)
             {
                 return HttpNotFound();
             }
-
             ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name", note.GroupId);
-
             return View("Create", note);
         }
 
@@ -97,15 +90,11 @@ namespace Notesapp.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 db.Entry(note).State = EntityState.Modified;
-
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name", note.GroupId);
-
             return View("Create", note);
         }
 
@@ -114,10 +103,8 @@ namespace Notesapp.Controllers
 
         public ActionResult Delete(int id)
         {
-
-            Note note = db.Notes.Find(id);
+            Note note = db.Notes.ForUser(CurrentUserName).Single(n => n.Id == id);
             db.Notes.Remove(note);
-
             db.SaveChanges();
             return RedirectToAction("Index");
         }

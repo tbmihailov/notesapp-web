@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,6 +11,7 @@ namespace Notesapp.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Content { get; set; }
+        [Display(AutoGenerateField = false)]
         public DateTime Created { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }

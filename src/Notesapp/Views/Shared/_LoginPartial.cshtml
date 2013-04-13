@@ -7,10 +7,10 @@
             @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })
         </li>
         <li>
-            @using (Html.BeginForm("LogO ff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", style = "padding: 10px 15px; margin:0px;" }))
             {
                 @Html.AntiForgeryToken()
-                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
             }
         </li>
 
@@ -18,7 +18,7 @@
     else
     {
         <li>
-            @Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "navbar-link" })
+            @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "navbar-link" })
         </li>
     }
 </ul>

@@ -26,7 +26,7 @@ if(mvcHost.IsPartialView) {
 #>
 
 @{
-    ViewBag.Title = "<#= mvcHost.ViewName#>";
+    ViewBag.Title = "<#= mvcHost.ViewName #>";
 <#
 if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) {
 #>
@@ -36,7 +36,7 @@ if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) {
 #>
 }
 
-<h2><#= mvcHost.ViewName#></h2>
+<h2>@ViewBag.Title</h2>
 
 <#
 } else {
@@ -51,7 +51,7 @@ if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) {
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title><#= mvcHost.ViewName #></title>
+    <title>@ViewBag.Title</title>
 </head>
 <body>
 <#
@@ -59,7 +59,7 @@ if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) {
 }
 #>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class="btn"})
 </p>
 <table class="table">
 	<thead>
@@ -97,17 +97,17 @@ string pkName = GetPrimaryKeyName(mvcHost.ViewDataType);
 if (pkName != null) {
 #>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.<#= pkName #> }, new { @class="btn" }) |
-            @Html.ActionLink("Details", "Details", new { id=item.<#= pkName #> }, new { @class="btn" }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.<#= pkName #> }, new { @class="btn" })
+            @Html.ActionLink("Edit", "Edit", new { id=item.<#= pkName #> }, new { @class="btn btn-primary" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.<#= pkName #> }, new { @class="btn btn-info" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.<#= pkName #> }, new { @class="btn btn-danger" })
         </td>
 <#
 } else {
 #>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { @class="btn" }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @class="btn" }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class="btn" })
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { @class="btn btn-primary" }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @class="btn btn-info" }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class="btn btn-danger" })
         </td>
 <#
 }

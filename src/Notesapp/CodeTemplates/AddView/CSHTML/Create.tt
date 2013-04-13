@@ -82,7 +82,8 @@ if (mvcHost.ReferenceScriptLibraries) {
 foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
     if (!property.IsPrimaryKey && !property.IsReadOnly && property.Scaffold) {
 #>
-        <div class="control-group">
+		<dl class="dl-horizontal">
+			<dt>
 <#
         if (property.IsForeignKey) {
 #>
@@ -94,8 +95,8 @@ foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
 <#
         }
 #>
-        
-			<div class="controls">
+			</dt>
+			<dd>
 <#
         if (property.IsForeignKey) {
 #>
@@ -108,8 +109,8 @@ foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
         }
 #>
 				@Html.ValidationMessageFor(model => model.<#= property.Name #>, string.Empty, new { @class="help-inline" })
-			</div>
-		</div>
+			</dd>
+			</dl>
 
 <#
     }
@@ -117,7 +118,7 @@ foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
 #>
         <div class="control-group">
 			<div class="controls">
-				<input type="submit" value="Create" class="btn" /> &nbsp; @Html.ActionLink("Cancel", "Index")
+				<input type="submit" value="Create" class="btn btn-primary" /> &nbsp; @Html.ActionLink("Cancel", "Index", null, new { @class="btn"})
 			</div>
         </div>
     </fieldset>
