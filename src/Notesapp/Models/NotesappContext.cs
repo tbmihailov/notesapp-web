@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace Notesapp.Models
 {
@@ -13,11 +14,32 @@ namespace Notesapp.Models
         // 
         // System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Notesapp.Models.NotesappContext>());
 
-        public NotesappContext() : base("NotesappDb")
+        public NotesappContext() : base("DefaultConnection")
         {
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<NotesappContext, NotesappMigrationConfiguration>());//Database is configured to use migrations
+            base.OnModelCreating(modelBuilder);
+        }
+
 
         public DbSet<Group> Groups { get; set; }
         public DbSet<Note> Notes { get; set; }
     }
+
+    
+    /// <summary>
+    /// Migration configuration for using migrations
+    /// </summary>
+    public class NotesappMigrationConfiguration : DbMigrationsConfiguration<NotesappContext>
+    {
+        public NotesappMigrationConfiguration()
+        {
+            AutomaticMigrationsEnabled = true;//Enabled automatic migrations
+            AutomaticMigrationDataLossAllowed = true;
+        }
+    }
+
 }
