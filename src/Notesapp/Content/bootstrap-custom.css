@@ -1,3 +1,8 @@
+/*homepage masthead*/
+.navbar-masthead {
+    color: #333333;
+}
+
 .navbar-inner {
     /*#454B56,  #393F48 - kofa green*/
     /*dark  #454B56, #393F48);*/
@@ -34,7 +39,7 @@
 }
 
 body {
-    background: url("http://d36xtkk24g8jdx.cloudfront.net/bluebar/bcef4a1/images/shared/noise-2.png")repeat scroll 0 0 #EDEEEF;
+    background: url("/images/background-noise.png")repeat scroll 0 0 #EDEEEF;
     overflow-y: scroll;
 }
 
