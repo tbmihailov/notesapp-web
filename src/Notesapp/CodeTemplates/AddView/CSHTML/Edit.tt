@@ -73,7 +73,8 @@ if (mvcHost.ReferenceScriptLibraries) {
 }
 #>
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+	@*@Html.ValidationSummary()*@
+    @Html.BootstrapValidationSummary(true)
 
     <fieldset>
         <legend><#= mvcHost.ViewDataType.Name #></legend>

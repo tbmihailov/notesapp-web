@@ -9,6 +9,7 @@ namespace Notesapp.Models
     public class Group
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
         public string Owner { get; set; }

@@ -200,6 +200,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Note.cs" />
@@ -287,7 +288,7 @@
     </Content>
     <Content Include="CodeTemplates\AddView\CSHTML\Create.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Create1.cs</LastGenOutput>
+      <LastGenOutput>Create.cshtml</LastGenOutput>
     </Content>
     <Content Include="CodeTemplates\AddView\CSHTML\Delete.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -299,7 +300,7 @@
     </Content>
     <Content Include="CodeTemplates\AddView\CSHTML\Edit.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Edit1.cs</LastGenOutput>
+      <LastGenOutput>Edit.cshtml</LastGenOutput>
     </Content>
     <Content Include="CodeTemplates\AddView\CSHTML\Empty.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -307,11 +308,11 @@
     </Content>
     <Content Include="CodeTemplates\AddView\CSHTML\List.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>List1.cs</LastGenOutput>
+      <LastGenOutput>List.cshtml</LastGenOutput>
     </Content>
     <Content Include="CodeTemplates\AddController\ControllerWithContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ControllerWithContext.cs</LastGenOutput>
+      <LastGenOutput>ControllerWithContext.cshtml</LastGenOutput>
     </Content>
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
