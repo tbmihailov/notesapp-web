@@ -2,55 +2,8 @@
     ViewBag.Title = "Home Page";
 }
 
-@if (!User.Identity.IsAuthenticated)
-{ 
-    @section jumbotron{
-        <div class="jumbotron masthead">
-            <div class="container">
-                <div class="row" style="margin-top: 30px">
-                    <h1>
-                        @*<img src="@Url.Content("~/Content/Images/landing-logo.png")" alt="Your project name" />*@
-                        Your project name
-                    </h1>
-                </div>
-                <p>Your awesome project slogan!</p>
-                <span>
-                    @Html.ActionLink("Sign up now", "Register", "Account", null, new { @class = "btn btn-primary btn-large" })
-                @*@Html.ActionLink("Sign in ", "Login", "Account", null, new { @class = "btn btn-primary btn-large" })*@
-                </span>
-                <ul class="masthead-links">
-                    <li>
-                        <a href="https://www.facebook.com/">Facebook</a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/">Twitter</a>
-                    </li>
-                    @*                <li>
-                    <a onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Jumbotron links', 'Extend']);" href="./extend.html">Extend</a>
-                </li>*@
-                    <li>Version 1.0.0
-                    </li>
-                </ul>
-            </div>
-        </div>
-    }
-}
 <div class="container container-main" style="margin-top: 30px">
     <div class="row">
-        <div class="span4" style="padding: 10px">
-            <h2>What we do</h2>
-            <p>Describe what is this project for</p>
-        </div>
-        <div class="span3" style="padding: 10px">
-            <h2>Features</h2>
-            <p>Briefly describe this project features</p>
-
-        </div>
-        <div class="span4" style="padding: 10px">
-            <h2>Why</h2>
-            <p>Describe why users should prefer your project and would use it</p>
-
-        </div>
     </div>
 </div>
 
