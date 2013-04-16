@@ -23,6 +23,7 @@
         .container-narrow {
             margin: 0 auto;
             max-width: 960px;
+            width: 940px;
         }
 
             .container-narrow > hr {
@@ -31,12 +32,14 @@
 
         /* Main marketing message and sign up button */
         .jumbotron {
-            margin: 60px 0;
+            padding: 60px 0;
             text-align: center;
+            background-color: #0c0b0b;
+            color: #ffffff;
         }
 
             .jumbotron h1 {
-                font-size: 72px;
+                font-size: 100px;
                 line-height: 1;
             }
 
@@ -71,7 +74,7 @@
 
 <body>
 
-    <div class="container-narrow">
+    <div class="container">
 
         <div class="masthead">
             <ul class="nav nav-pills pull-right">
@@ -89,48 +92,39 @@
                 </li>
             </ul>
             <h3 class="muted">
-                @Html.ActionLink("Notesapp", "Index", "Home")
+                @Html.ActionLink("Notesapp", "Index", "Home", null, new { @class = "brand" })
             </h3>
         </div>
-
-        <hr>
-
-        <div class="jumbotron">
-            <h1>Super awesome marketing speak!</h1>
-            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            @Html.ActionLink("Sign up today", "Register", "Account", null, new { @class="btn btn-success btn-large" } )
+    </div>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Notesapp</h1>
+            <p class="lead">Keep track of your notes with ease and style</p>
+            @Html.ActionLink("Sign up today", "Register", "Account", null, new { @class = "btn btn-success btn-large" })
         </div>
+    </div>
 
-        <hr>
 
+    <div class="container">
         <div class="row-fluid marketing">
-            <div class="span6">
-                <h4>Subheading</h4>
-                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-                <h4>Subheading</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-                <h4>Subheading</h4>
-                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            <div class="span4">
+                <h3>Keep your notes</h3>
+                <p>Keep your notes up and ready</p>
             </div>
-
-            <div class="span6">
-                <h4>Subheading</h4>
-                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-                <h4>Subheading</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-                <h4>Subheading</h4>
-                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+<div class="span4">
+                <h3>Features</h3>
+                <p>Organize your notes by groups and tags</p>
+            </div>
+            <div class="span4">
+                <h3>Mobile</h3>
+                <p>Reach your notes anytime anywhere</p>
             </div>
         </div>
 
         <hr>
 
         <div class="footer">
-            <p>&copy; Company 2013</p>
+            <p>&copy; Notesapp @DateTime.Now.Year</p>
         </div>
 
     </div>
