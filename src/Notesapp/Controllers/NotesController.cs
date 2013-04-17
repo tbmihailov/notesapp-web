@@ -55,7 +55,7 @@ namespace Notesapp.Controllers
         {
             if (ModelState.IsValid)
             {
-			//note.Owner = CurrentUserName;//TODO: Add owner property with current user name/id
+			    //note.Owner = CurrentUserName;//TODO: Add owner property with current user name/id
                 note.Created = DateTime.Now;
                 note.Owner = CurrentUserName;
 

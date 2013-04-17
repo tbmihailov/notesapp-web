@@ -21,7 +21,7 @@ namespace Notesapp
         {
             AreaRegistration.RegisterAllAreas();
 
-            ConfigureDb();
+            //ConfigureDb();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -33,9 +33,6 @@ namespace Notesapp
         private void ConfigureDb()
         {
             Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
-
-
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<NotesappContext>());
         }
     }
 }

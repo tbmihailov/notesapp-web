@@ -313,14 +313,19 @@
     </Content>
     <Content Include="CodeTemplates\AddView\CSHTML\List.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>List.cshtml</LastGenOutput>
+      <LastGenOutput>List.cs</LastGenOutput>
     </Content>
     <Content Include="CodeTemplates\AddController\ControllerWithContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ControllerWithContext.cshtml</LastGenOutput>
     </Content>
+    <Content Include="Scripts\DateTimeEditors.js" />
+    <Content Include="Scripts\EFSpatialGoogleMaps.js" />
     <Content Include="Views\Home\Landing.cshtml" />
     <Content Include="Views\Account\_RegisterPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DbGeography.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DbGeography.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

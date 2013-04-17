@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Data.Spatial;
 
 namespace Notesapp.Models
 {
@@ -14,8 +15,9 @@ namespace Notesapp.Models
         public string Content { get; set; }
         [Display(AutoGenerateField = false)]
         public DateTime Created { get; set; }
-        public double Lat { get; set; }
-        public double Lon { get; set; }
+        //public System.Data.Spatial.DbGeography Location { get; set; }
+        public float Lat { get; set; }
+        public float Lon { get; set; }
         public string Image { get; set; }
         public string Owner { get; set; }
         public int GroupId { get; set; }

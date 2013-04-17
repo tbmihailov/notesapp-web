@@ -14,33 +14,35 @@ namespace System.Web.Mvc
             if (helper.ViewData.ModelState.IsValid)
                 return new MvcHtmlString("");
 
+
             retVal += "<div class='alert alert-error'><a class='close' data-dismiss='alert'>×</a><span>";
             if (!String.IsNullOrEmpty(validationMessage))
                 retVal += helper.Encode(validationMessage);
             retVal += "</span>";
             retVal += "<div class='text'>";
 
-            ICollection<string> keys;
-            if (!excludeModelErrors)
-            {
-                keys = helper.ViewData.Keys;
-            }
-            else
-            {
-                keys = new List<string>();
-                keys.Add(string.Empty);
-            }
-
-
+            ICollection<string> keys = helper.ViewData.Keys;
+            int errorsCnt = 0;
             foreach (var key in keys)
             {
-                foreach (var err in helper.ViewData.ModelState[key].Errors)
+                if ((!excludeModelErrors) || (excludeModelErrors && (key == string.Empty)))
                 {
-                    retVal += "<p>" + helper.Encode(err.ErrorMessage) + "</p>";
+                    foreach (var err in helper.ViewData.ModelState[key].Errors)
+                    {
+                        retVal += "<p>" + helper.Encode(err.ErrorMessage) + "</p>";
+                        errorsCnt++;
+                    }
                 }
             }
             retVal += "</div></div>";
-            return new MvcHtmlString(retVal.ToString());
+            if (errorsCnt > 0)
+            {
+                return new MvcHtmlString(retVal.ToString());
+            }
+            else
+            {
+                return new MvcHtmlString("");
+            }
         }
     }
 }

@@ -23,6 +23,16 @@ namespace Notesapp
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            //Use of DbGeography edito and display templates from
+            //http://www.hanselman.com/blog/ASPNETMVCDisplayTemplateAndEditorTemplatesForEntityFrameworkDbGeographySpatialTypes.aspx
+            bundles.Add(new ScriptBundle("~/bundles/DbGeographyTemplates").Include(
+                        "~/Scripts/EFSpatialGoogleMaps.js"));
+
+            //DateTime pickers 
+            bundles.Add(new ScriptBundle("~/bundles/DateTimeTemplates").Include(
+                        "~/Scripts/DateTimeEditors.js"));
+
+
             //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

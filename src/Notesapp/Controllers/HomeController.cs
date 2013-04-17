@@ -20,7 +20,7 @@ namespace Notesapp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "Explain what problems your project solves and how";
 
             return View();
         }

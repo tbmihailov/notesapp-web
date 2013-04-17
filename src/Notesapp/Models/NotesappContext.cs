@@ -14,12 +14,13 @@ namespace Notesapp.Models
         // 
         // System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Notesapp.Models.NotesappContext>());
 
-        public NotesappContext() : base("DefaultConnection")
+        public NotesappContext() : base("name=DefaultConnection")
         {
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<NotesappContext>());//default
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<NotesappContext, NotesappMigrationConfiguration>());//Database is configured to use migrations
             base.OnModelCreating(modelBuilder);
         }
