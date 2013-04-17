@@ -1,0 +1,40 @@
+﻿@model Notesapp.Models.RegisterModel
+
+@using (Html.BeginForm("Register", "Account")) {
+    <fieldset>
+        <h2>Sign up</h2>
+         <dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.UserName)
+		</dt>
+		<dd>
+			@Html.TextBoxFor(model => model.UserName, new { placeholder="username"})
+		</dd>
+	</dl>
+
+    <dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Password)
+		</dt>
+		<dd>
+			@Html.PasswordFor(model => model.Password, new { placeholder="password"})
+		</dd>
+	</dl>
+
+    <dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.ConfirmPassword)
+		</dt>
+		<dd>
+			@Html.PasswordFor(model => model.ConfirmPassword, new { placeholder="confirm password"})
+		</dd>
+	</dl>
+        <input type="submit" value="Sign up today!" class="btn btn-success" style="padding:5px" />
+    </fieldset>
+}
+
+
+
+
+
+

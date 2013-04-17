@@ -98,9 +98,17 @@
     </div>
     <div class="jumbotron">
         <div class="container">
-            <h1>Notesapp</h1>
-            <p class="lead">Keep track of your notes with ease and style</p>
-            @Html.ActionLink("Sign up today", "Register", "Account", null, new { @class = "btn btn-success btn-large" })
+            <div class="row">
+                <div class="span7">
+                    <h1>Notesapp</h1>
+                    <p class="lead">Keep track of your notes with ease and style</p>
+                    @*@Html.ActionLink("Sign up today", "Register", "Account", null, new { @class = "btn btn-success btn-large" })*@
+                </div>
+                <div class="span3">
+                    @Html.Partial("~/Views/Account/_RegisterPartial.cshtml", new Notesapp.Models.RegisterModel())
+                </div>
+                <div class="span1"></div>
+            </div>
         </div>
     </div>
 
@@ -111,7 +119,7 @@
                 <h3>Keep your notes</h3>
                 <p>Keep your notes up and ready</p>
             </div>
-<div class="span4">
+            <div class="span4">
                 <h3>Features</h3>
                 <p>Organize your notes by groups and tags</p>
             </div>
