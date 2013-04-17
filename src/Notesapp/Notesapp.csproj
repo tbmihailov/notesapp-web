@@ -209,6 +209,7 @@
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\NotesappContext.cs" />
+    <Compile Include="ViewModels\TermsOfUseViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +218,7 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\sticky-footer.css" />
     <Content Include="Content\images\background-noise.png" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
@@ -317,7 +319,7 @@
     </Content>
     <Content Include="CodeTemplates\AddController\ControllerWithContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ControllerWithContext.cshtml</LastGenOutput>
+      <LastGenOutput>ControllerWithContext.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\DateTimeEditors.js" />
     <Content Include="Scripts\EFSpatialGoogleMaps.js" />
@@ -326,6 +328,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DbGeography.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DbGeography.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Home\TermsOfUse.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -369,7 +372,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />

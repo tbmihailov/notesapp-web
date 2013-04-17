@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Notesapp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,8 +29,17 @@ namespace Notesapp.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+
+        public ActionResult TermsOfUse()
+        {
+            var termsOfUse = new TermsOfUseViewModel()
+            {
+                CompanyName = "Notesapp",
+                CompanyState = "State"
+            };
+            return View(termsOfUse);
         }
     }
 }

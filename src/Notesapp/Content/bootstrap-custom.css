@@ -36,7 +36,7 @@
 }
 
 body {
-    background: url("/images/background-noise.png")repeat scroll 0 0 #EDEEEF;
+    background: url("/images/background-noise.png")repeat scroll 0 0 #F7f7f7;
     overflow-y: scroll;
 }
 
@@ -69,9 +69,11 @@ body {
 .container-main {
     background-color: #ffffff;
     border-radius: 5px;
-    padding: 10px;
+    padding: 15px;
 }
 
 .main-logo {
     background: url("");
 }
+
+
