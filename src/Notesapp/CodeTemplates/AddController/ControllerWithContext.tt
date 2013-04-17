@@ -172,7 +172,7 @@ namespace <#= Model.Namespace #>
 <# foreach (var property in Model.RelatedProperties.Values) { #>
             ViewBag.<#= property.ForeignKeyPropertyName #> = new SelectList(db.<#= property.EntitySetName #>, "<#= property.PrimaryKey #>", "<#= property.DisplayPropertyName #>", <#= modelVariable #>.<#= property.ForeignKeyPropertyName #>);
 <# } #>
-            return View("Create", <#= modelVariable #>);
+            return View("Edit", <#= modelVariable #>);
         }
 
         //

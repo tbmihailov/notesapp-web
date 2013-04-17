@@ -1,7 +1,6 @@
 ﻿
 //DatePicker
 $(function () {
-    alert('test');
     $(".datepicker").datepicker();
 
     //DateTimePicker
