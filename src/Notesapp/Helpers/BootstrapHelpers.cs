@@ -21,7 +21,7 @@ namespace System.Web.Mvc
             retVal += "</span>";
             retVal += "<div class='text'>";
 
-            ICollection<string> keys = helper.ViewData.Keys;
+            ICollection<string> keys = helper.ViewData.ModelState.Keys;
             int errorsCnt = 0;
             foreach (var key in keys)
             {

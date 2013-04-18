@@ -48,4 +48,9 @@ namespace Notesapp.Filters
             }
         }
     }
+
+    public static class AuthConstants
+    {
+        public const string AUTH_TOKEN_NAME = "AUTH_TOKEN";
+    }
 }
