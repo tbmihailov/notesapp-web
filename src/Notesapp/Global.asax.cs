@@ -33,8 +33,8 @@ namespace Notesapp
         private void ConfigureDb()
         {
             Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
-            NotesappContext context = new NotesappContext();
-            context.Database.CreateIfNotExists();
+            //NotesappContext context = new NotesappContext();
+            //context.Database.CreateIfNotExists();
             var init = new SimpleMembershipInitializer();
 
         }
