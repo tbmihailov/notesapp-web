@@ -30,7 +30,6 @@ namespace Notesapp.Models
         public DbSet<Note> Notes { get; set; }
     }
 
-    
     /// <summary>
     /// Migration configuration for using migrations
     /// </summary>

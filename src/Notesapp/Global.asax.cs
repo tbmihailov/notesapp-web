@@ -1,4 +1,5 @@
-﻿using Notesapp.Models;
+﻿using Notesapp.Filters;
+using Notesapp.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -21,8 +22,7 @@ namespace Notesapp
         {
             AreaRegistration.RegisterAllAreas();
 
-            //ConfigureDb();
-
+            ConfigureDb();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -33,6 +33,10 @@ namespace Notesapp
         private void ConfigureDb()
         {
             Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
+            NotesappContext context = new NotesappContext();
+            context.Database.CreateIfNotExists();
+            var init = new SimpleMembershipInitializer();
+
         }
     }
 }

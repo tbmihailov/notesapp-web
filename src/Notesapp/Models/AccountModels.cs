@@ -5,17 +5,33 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
+using WebMatrix.WebData;
 
 namespace Notesapp.Models
 {
     public class UsersContext : DbContext
     {
         public UsersContext()
-            : base("DefaultConnection")
+            : base("name=UsersContext")
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer(new UsersContextInit());
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<UserProfile> UserProfiles { get; set; }
+    }
+
+    public class UsersContextInit : DropCreateDatabaseIfModelChanges<UsersContext>
+    {
+        protected override void Seed(UsersContext context)
+        {
+            WebSecurity.InitializeDatabaseConnection("UsersContext",
+                "UserProfile", "UserId", "UserName", autoCreateTables: true);
+        }
     }
 
     [Table("UserProfile")]
@@ -25,6 +41,7 @@ namespace Notesapp.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public string AuthToken { get; set; }
     }
 
     public class RegisterExternalLoginModel

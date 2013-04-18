@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Notesapp.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -15,6 +16,13 @@ namespace Notesapp
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Routes.MapHttpRoute(
+                name: "LoginApi",
+                routeTemplate: "api/Account/Login",
+                defaults: new { controller="Account", action="Login"}
+            );
+
+            config.MessageHandlers.Add(new MobileAuthenticationMessageHandler());
             config.EnableQuerySupport();
         }
     }

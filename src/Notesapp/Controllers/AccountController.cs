@@ -14,7 +14,7 @@ using Notesapp.Models;
 namespace Notesapp.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
+    //[InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
