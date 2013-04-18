@@ -17,6 +17,7 @@
             padding-top: 20px;
             padding-bottom: 40px;
             background: #ffffff;
+            font-size: 18px;
         }
 
         /* Custom container */
@@ -55,8 +56,13 @@
 
             .marketing p + h4 {
                 margin-top: 28px;
-                min-height:100px;
+                min-height: 100px;
             }
+
+        #landing-signup input[type="text"], input[type="password"] {
+            font-size: 20px;
+            padding: 10px;
+        }
     </style>
     <link href="~/Content/bootstrap-responsive.css" rel="stylesheet">
     @*<link href="~/Content/sticky-footer.css" rel="stylesheet">*@
@@ -100,7 +106,7 @@
     <div class="jumbotron">
         <div class="container">
             <div class="row">
-                <div class="span7">
+                <div class="span8">
                     <h1>Notesapp</h1>
                     <p class="lead">your awesome notes manager</p>
                     @*@Html.ActionLink("Sign up today", "Register", "Account", null, new { @class = "btn btn-success btn-large" })*@
@@ -108,22 +114,22 @@
                 <div class="span3">
                     @Html.Partial("~/Views/Account/_RegisterPartial.cshtml", new Notesapp.Models.RegisterModel())
                 </div>
-                <div class="span1"></div>
+
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row-fluid marketing">
             <div class="span4">
-                <h3>Keep your notes</h3>
+                <h2>Keep your notes</h2>
                 <p>Keep your notes up and ready</p>
             </div>
             <div class="span4">
-                <h3>Features</h3>
+                <h2>Features</h2>
                 <p>Organize your notes by groups and tags</p>
             </div>
             <div class="span4">
-                <h3>Mobile</h3>
+                <h2>Mobile</h2>
                 <p>Reach your notes anytime anywhere</p>
             </div>
         </div>

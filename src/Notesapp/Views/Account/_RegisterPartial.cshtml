@@ -1,36 +1,30 @@
 ﻿@model Notesapp.Models.RegisterModel
 
-@using (Html.BeginForm("Register", "Account")) {
-    <fieldset>
-        <h2>Sign up</h2>
-         <dl class="dl-horizontal">
-		<dt>
-			@Html.DisplayNameFor(model => model.UserName)
-		</dt>
-		<dd>
-			@Html.TextBoxFor(model => model.UserName, new { placeholder="username"})
-		</dd>
-	</dl>
+@using (Html.BeginForm("Register", "Account"))
+{@Html.AntiForgeryToken()
+    <div id="landing-signup">
+        <div class="span">
+            <h2>Sign up</h2>
+        </div>
 
-    <dl class="dl-horizontal">
-		<dt>
-			@Html.DisplayNameFor(model => model.Password)
-		</dt>
-		<dd>
-			@Html.PasswordFor(model => model.Password, new { placeholder="password"})
-		</dd>
-	</dl>
+        <div class="span">
+            @Html.TextBoxFor(model => model.UserName, new { placeholder = "username" })
+        </div>
+        <div class="span">
+            @Html.PasswordFor(model => model.Password, new { placeholder = "password" })
+        </div>
 
-    <dl class="dl-horizontal">
-		<dt>
-			@Html.DisplayNameFor(model => model.ConfirmPassword)
-		</dt>
-		<dd>
-			@Html.PasswordFor(model => model.ConfirmPassword, new { placeholder="confirm password"})
-		</dd>
-	</dl>
-        <input type="submit" value="Sign up today!" class="btn btn-success" style="padding:5px" />
-    </fieldset>
+        <div class="span">
+            @Html.PasswordFor(model => model.ConfirmPassword, new { placeholder = "confirm password" })
+        </div>
+        <div class="span">
+            <br />
+            By clicking 'Sign up today!' you agree with the @Html.ActionLink("Terms of use", "TermsOfUse")
+        </div>
+        <div class="span">
+            <input type="submit" value="Sign up today!" class="btn btn-success" style="padding: 5px" />
+        </div>
+    </div>
 }
 
 
