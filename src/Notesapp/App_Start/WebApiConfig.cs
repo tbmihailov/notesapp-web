@@ -22,7 +22,10 @@ namespace Notesapp
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            
+
+            //Reference serializing in WebAPI Help page
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
 
             config.MessageHandlers.Add(new MobileAuthenticationMessageHandler());
             config.EnableQuerySupport();
